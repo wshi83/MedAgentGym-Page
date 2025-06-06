@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>About - MedAgentGym - Documentation</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "About";
+        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> MedAgentGym - Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href=".">About</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#backbones">Backbones</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#medical-reasoning-tasks">Supported Medical Reasoning Tasks</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#data">Data</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#experimental-results">Agent Scaffolds</a>
+    </li>
+    <!-- <li class="toctree-l2"><a class="reference internal" href="#ongoing-works-active-learning">Ongoing Works: Active Learning</a>
+    </li> -->
+    <li class="toctree-l2"><a class="reference internal" href="#citation">Citation</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="env/">Environment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="train.cli/">Running Experiments</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MedAgentGym API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="medagentgym.args/">medagentgym.args</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="medagentgym.agent/">medagentgym.agent</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="medagentgym.env/">medagentgym.env</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="medagentgym.llm/">medagentgym.llm</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="medagentgym.utils/">medagentgym.utils</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="customize/">Customization</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">MedAgentGym - Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Introduction</li>
+      <li class="breadcrumb-item active">About</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="muben-documentation">MedAgentGym Documentation</h1>
+<p><a href="https://github.com/Yinghao-Li/MUBen"><img alt="GitHub" src="https://img.shields.io/badge/GitHub-MUBen-white" /></a>
+<a href="https://openreview.net/forum?id=qYceFeHgm4"><img alt="OpenReview" src="https://img.shields.io/badge/%F0%9F%94%97%20OpenReview-TMLR-darkred" /></a>
+<a href="https://arxiv.org/abs/2306.10060"><img alt="arXiv" src="https://img.shields.io/badge/arXiv-2306.10060-b31b1b.svg" /></a>
+<a href="https://github.com/Yinghao-Li/MUBen/"><img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" /></a>
+<a href="https://badge.fury.io/py/muben"><img alt="PyPI version" src="https://badge.fury.io/py/muben.svg" /></a></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This is the documentation for <strong><a href="https://github.com/Yinghao-Li/MUBen/">MedAgentGym</a>: Interactive Medical Coding Environment</strong>.
+The code is built to expose implementation details as much as possible and be easily extendable.
+Questions and suggestions are welcome if you find any issues while using our code.</p>
+</div>
+<p><img alt="" src="img/MedAgentGym-figure1.png" /></p>
+<p>MedAgentGym is the first publicly available training envrionment designed to enhance coding-based medical reasoning capabilities in large language model (LLM) agents.
+MedAgentGym comprises 72413 task instances across 129 categories derived from 12 authentic real-world biomedical scenarios.
+We are actively expanding the benchmark to include more medical coding backbone models, agent scaffolds and datasets.
+This is an arduous task, and we welcome contribution or collaboration in any form.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The following of this page introduces the basic information and structure of the MedAgentGym project.
+For its utilization or customization, please visit the <a href="train.cli/">Experiments</a> or <a href="customize/">Customization</a> pages.</p>
+</div>
+<h2 id="backbones">Backbones</h2>
+<p>The following backbone models are implemented in MedAgentGym, and their performance discussed in the article.</p>
+<table>
+<thead>
+<tr>
+<th>Backbone Models</th>
+<th>Paper</th>
+<th>Model Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><em>API-based Proprietary LLMs</em></strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>gpt-4o-mini</td>
+<td><a href="https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/">link</a></td>
+<td><a href="https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/">link</a></td>
+</tr>
+<tr>
+<td>gpt-4o</td>
+<td><a href="https://openai.com/index/hello-gpt-4o/">link</a></td>
+<td><a href="https://openai.com/index/hello-gpt-4o/">link</a></td>
+</tr>
+<tr>
+<td>gpt-4.1(-mini)</td>
+<td><a href="https://openai.com/index/gpt-4-1/">link</a></td>
+<td><a href="https://openai.com/index/gpt-4-1/">link</a></td>
+</tr>
+<tr>
+<td>o4-mini</td>
+<td><a href="https://openai.com/index/introducing-o3-and-o4-mini/">link</a></td>
+<td><a href="https://openai.com/index/introducing-o3-and-o4-mini/">link</a></td>
+</tr>
+<tr>
+<td><strong><em>OSS (Base Size): Less than 10B parameters</em></strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Gemma-3-4b-it</td>
+<td><a href="https://storage.googleapis.com/deepmind-media/gemma/Gemma3Report.pdf">link</a></td>
+<td><a href="https://huggingface.co/google/gemma-3-4b-it">HuggingFace</a></td>
+</tr>
+<tr>
+<td>Qwen3-1.7B</td>
+<td><a href="https://arxiv.org/pdf/2505.09388">link</a></td>
+<td><a href="https://huggingface.co/Qwen/Qwen3-1.7B">HuggingFace</a></td>
+</tr>
+<tr>
+<td>Qwen3-4B</td>
+<td><a href="https://arxiv.org/pdf/2505.09388">link</a></td>
+<td><a href="https://huggingface.co/Qwen/Qwen3-4B">HuggingFace</a></td>
+</tr>
+<tr>
+<td>Qwen3-8B</td>
+<td><a href="https://arxiv.org/pdf/2505.09388">link</a></td>
+<td><a href="https://huggingface.co/Qwen/Qwen3-8B">HuggingFace</a></td>
+</tr>
+<tr>
+<td>Qwen2.5-7B-Instruct</td>
+<td><a href="https://arxiv.org/abs/2412.15115">link</a></td>
+<td><a href="https://huggingface.co/Qwen/Qwen2.5-7B-Instruct">HuggingFace</a></td>
+</tr>
+<tr>
+<td>Llama-3.1-8B-Instruct</td>
+<td><a href="https://arxiv.org/abs/2407.21783">link</a></td>
+<td><a href="https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct">HuggingFace</a></td>
+</tr>
+<tr>
+<td>Ministral-8B</td>
+<td><a href="https://mistral.ai/news/ministraux">link</a></td>
+<td><a href="https://huggingface.co/mistralai/Ministral-8B-Instruct-2410">HuggingFace</a></td>
+</tr>
+<tr>
+<td><strong><em>OSS (Large Size): 10 - 30B parameters</em></strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Qwen3-14B</td>
+<td><a href="https://arxiv.org/pdf/2505.09388">link</a></td>
+<td><a href="https://huggingface.co/Qwen/Qwen3-14B">HuggingFace</a></td>
+</tr>
+<tr>
+<td>Qwen2.5-14B-Instruct</td>
+<td><a href="https://arxiv.org/abs/2412.15115">link</a></td>
+<td><a href="https://huggingface.co/Qwen/Qwen2.5-14B-Instruct">HuggingFace</a></td>
+</tr>
+<tr>
+<td>DeepSeek-R1-Distill-Qwen-14B</td>
+<td><a href="https://github.com/deepseek-ai/DeepSeek-R1/blob/main/DeepSeek_R1.pdf">link</a></td>
+<td><a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-14B">HuggingFace</a></td>
+</tr>
+<tr>
+<td><strong><em>OSS (XL Size): More than 30B parameters</em></strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Qwen3-32B</td>
+<td><a href="https://arxiv.org/pdf/2505.09388">link</a></td>
+<td><a href="https://huggingface.co/Qwen/Qwen3-32B">HuggingFace</a></td>
+</tr>
+<tr>
+<td>Qwen2.5-32B-Instruct</td>
+<td><a href="https://arxiv.org/abs/2412.15115">link</a></td>
+<td><a href="https://huggingface.co/Qwen/Qwen2.5-32B-Instruct">HuggingFace</a></td>
+</tr>
+<tr>
+<td>DeepSeek-R1-Distill-Qwen-32B</td>
+<td><a href="https://github.com/deepseek-ai/DeepSeek-R1/blob/main/DeepSeek_R1.pdf">link</a></td>
+<td><a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B">HuggingFace</a></td>
+</tr>
+<tr>
+<td>QwQ-32B</td>
+<td><a href="https://qwenlm.github.io/blog/qwq-32b/">link</a></td>
+<td><a href="https://huggingface.co/Qwen/QwQ-32B">HuggingFace</a></td>
+</tr>
+<tr>
+<td>Llama-3.1-70B-Instruct</td>
+<td><a href="https://arxiv.org/abs/2407.21783">link</a></td>
+<td><a href="https://huggingface.co/meta-llama/Llama-3.1-70B-Instruct">HuggingFace</a></td>
+</tr>
+<tr>
+<td>DeepSeek-R1-Distill-Llama-70B</td>
+<td><a href="https://github.com/deepseek-ai/DeepSeek-R1/blob/main/DeepSeek_R1.pdf">link</a></td>
+<td><a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Llama-70B">HuggingFace</a></td>
+</tr>
+<tr>
+<td><strong><em>Coding LLMs and Medical Reasoning LLMs</em></strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Qwen2.5-Coder-7B-Instruct</td>
+<td><a href="https://arxiv.org/abs/2409.12186">link</a></td>
+<td><a href="https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct">HuggingFace</a></td>
+</tr>
+<tr>
+<td>Qwen2.5-Coder-14B-Instruct</td>
+<td><a href="https://arxiv.org/abs/2409.12186">link</a></td>
+<td><a href="https://huggingface.co/Qwen/Qwen2.5-Coder-14B-Instruct">HuggingFace</a></td>
+</tr>
+<tr>
+<td>HuatuoGPT-o1-7B</td>
+<td><a href="https://arxiv.org/pdf/2412.18925">link</a></td>
+<td><a href="https://huggingface.co/FreedomIntelligence/HuatuoGPT-o1-7B">HuggingFace</a></td>
+</tr>
+<tr>
+<td>m1-7B-23K</td>
+<td><a href="https://arxiv.org/abs/2504.00869">link</a></td>
+<td><a href="https://huggingface.co/UCSC-VLAA/m1-7B-23K">HuggingFace</a></td>
+</tr>
+<tr>
+<td>MedReason-8B</td>
+<td><a href="https://arxiv.org/abs/2504.00993">link</a></td>
+<td><a href="https://huggingface.co/UCSC-VLAA/MedReason-8B">HuggingFace</a></td>
+</tr>
+<tr>
+<td>Baichuan-M1-14B-Instruct</td>
+<td><a href="https://arxiv.org/abs/2502.12671">link</a></td>
+<td><a href="https://huggingface.co/baichuan-inc/Baichuan-M1-14B-Instruct">HuggingFace</a></td>
+</tr>
+</tbody>
+</table>
+<p>MedAgentGym also support easy integration of your own backbone models.
+To use your own backbones, please check the <a href="customize/">customization guide</a>.</p>
+<h2 id="medical-reasoning-tasks">Supported Medical Reasoning Tasks</h2>
+<p>Currently, MedAgentGym supports training and evaluation over 12 authentic real-world biomedical datasets.</p>
+<table>
+<thead>
+<tr>
+<th>Dataset</th>
+<th>Data Type</th>
+<th># Task Type</th>
+<th>Paper</th>
+<th>Data Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="4"><strong><em>Training and Internal Validation (In-Distribution)</em></strong></td>
+<td></td>
+</tr>
+<tr>
+<td>MIMIC-III</td>
+<td>Tabular</td>
+<td>9</td>
+<td><a href="https://www.nature.com/articles/sdata201635">MIMIC-III</a>, <a href="https://arxiv.org/abs/2301.07695">EHRSQL</a>, <a href="https://arxiv.org/abs/2401.07128">EHRAgent</a></td>
+<td><a href="https://physionet.org/content/mimiciii/1.4/">Raw</a>, <a href="https://github.com/glee4810/EHRSQL">Preprocessed1</a>, <a href="https://github.com/wshi83/EhrAgent/tree/main">Preprocessed2</a></td>
+</tr>
+<tr>
+<td>eICU</td>
+<td>Tabular</td>
+<td>10</td>
+<td><a href="https://www.nature.com/articles/sdata2018178">eICU</a>, <a href="https://arxiv.org/abs/2301.07695">EHRSQL</a>, <a href="https://arxiv.org/abs/2401.07128">EHRAgent</a></td>
+<td><a href="https://physionet.org/content/eicu-crd/2.0/">Raw</a>, <a href="https://github.com/glee4810/EHRSQL">Preprocessed1</a>, <a href="https://github.com/wshi83/EhrAgent/tree/main">Preprocessed2</a></td>
+</tr>
+<tr>
+<td>TREQS</td>
+<td>Tabular</td>
+<td>4</td>
+<td><a href="https://arxiv.org/abs/1908.01839">TREQS</a>, <a href="https://arxiv.org/abs/2401.07128">EHRAgent</a></td>
+<td><a href="https://github.com/wangpinggl/TREQS">Preprocessed1</a>, <a href="https://github.com/wshi83/EhrAgent/tree/main">Preprocessed2</a></td>
+</tr>
+<tr>
+<td>MedCalcBench</td>
+<td>Text</td>
+<td>55</td>
+<td><a href="https://proceedings.neurips.cc/paper_files/paper/2024/hash/99e81750f3fdfcaf9613db2dbf4bd623-Abstract-Datasets_and_Benchmarks_Track.html">MedCalcBench</a></td>
+<td><a href="https://github.com/ncbi-nlp/MedCalc-Bench">Data</a></td>
+</tr>
+<tr>
+<td>MedAgentBench</td>
+<td>Tabular</td>
+<td>10</td>
+<td><a href="https://arxiv.org/pdf/2501.14654?">MedAgentBench</a></td>
+<td><a href="https://github.com/stanfordmlgroup/MedAgentBench">Data</a></td>
+</tr>
+<tr>
+<td>BioCoder</td>
+<td>Text</td>
+<td>8</td>
+<td><a href="https://watermark.silverchair.com/btae230.pdf?token=AQECAHi208BE49Ooan9kkhW_Ercy7Dm3ZL_9Cf3qfKAc485ysgAAA58wggObBgkqhkiG9w0BBwagggOMMIIDiAIBADCCA4EGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMT8Unj3fUzn9RRVp6AgEQgIIDUvmHq2rSVV6m3ILqtCjMjkZ_oT5GlyVlFUhwa619stOlmav8QcWPP_QnI6izchqb01eynIZlirz45JVW8NxImGmYvriiJ85ViDyvlsMptRyMqrfqriEHx44npDZDTIfaGFPq2lmOintvmNHJsF12eIunNl0VM560nbIsUNKwlqEDKccZVaFU_9eEEdzkDo6NsyGQsGlQwywYj_zAWj4JV0bR6eRECxybKLpDRdK0WA8_bWuThC_34HRo3R9-Pmbp1fM6LQZAwoPzZAdAAeEy9vmF6SYrOxQjWd1Fsn1IBgt9s2oWsr7-TouL_ZQsZ-d-vTY6eHROhxG-P0-49qsd5l9WGOznRGR1-OA_SzDbKE4LjUogTG-MgxpYMaxUWqlnEB5xkzVYAglRuIlEU2X9TwKBNVs9PXnW_PAtXGSTwIBHK8coxNbnyF04OfC_DxXqWzu_iXjuLXsaX7TmZCqPkq5Bw44Ffi-tAOCQ6Pxgyjsx_PsULPiQTtBI4LVNTT1zo-5K4-4_ZDD0ZT34JwUvKcFy2_fwl3fDoHiMhi7kfJWQ8Z1FyISn106YNpxRZFJkziWqq2kOzvZA2Lp4l7W_c0BpTAPBy9JWag-YjIf2U6w3SqSsOLKOgDtbwsK4kw0aeBZfUYpS8ulXo9N5WyD0diJvA7xsjDQyEsbizi3KNXZzhWeN7Cwnf41NhO1ulIlWPH4wrny_K28jKhN9SXG7BQ6iujiQ_r50Oed4Z6wap1xupI2FJqnyIin0i4wfET-8RrGIbAijJIary83u7h3sDZChU8ZyVJANn98wtFYyBQiACkYnmQ2gm_Nf6Cv1UzEwEO9OiTXae6EOCeBxww5pKY3zosQH0GzAtqF9-TAG6UFB636C-wF3WFJmoHDGTvrCGCF-grPslRDK-l8_4Ck5zi_cqF4gMqKakJKdR68k-XkmKeHx1cbxd692LgJraBX6yuMolUujkiwPc-14fAW3zLMp6yWxYi8OkS6JgSNkXdCSuV2TqC-zPdO-eWqfkmlxmDwh-EILJIBPAWzUncOJQ4Y2s14ZHRgXfhCksjSsQ_tAKWuZvNR1MBs0xvLwlFRqWsvGLZPODJqDSpfy5UZr8AWmnl0H1LpDwZJ0Fdff_CeVG0M">BioCoder</a></td>
+<td><a href="https://github.com/gersteinlab/biocoder">link</a></td>
+</tr>
+<tr>
+<td>EHRShot</td>
+<td>Tabular</td>
+<td>15</td>
+<td><a href="https://proceedings.neurips.cc/paper_files/paper/2023/file/d42db1f74df54cb992b3956eb7f15a6f-Paper-Datasets_and_Benchmarks.pdf">EHRShot</a></td>
+<td><a href="https://som-shahlab.github.io/ehrshot-website/">link</a></td>
+</tr>
+<tr>
+<td>BioDSBench</td>
+<td>Text</td>
+<td>12</td>
+<td><a href="https://arxiv.org/pdf/2410.21591?">BioDSBench</a></td>
+<td><a href="https://huggingface.co/datasets/zifeng-ai/BioDSBench">link</a></td>
+</tr>
+<tr>
+<td colspan="4"><strong><em>External Validation (Out-Distribution)</em></strong></td>
+<td></td>
+</tr>
+<tr>
+<td>EHR-SeqSQL</td>
+<td>Tabular</td>
+<td>4</td>
+<td><a href="https://arxiv.org/abs/2406.00019">EHR-SeqSQL</a></td>
+<td><a href="https://github.com/seonhee99/EHR-SeqSQL">link</a></td>
+</tr>
+<tr>
+<td>EHRCon</td>
+<td>Tabular</td>
+<td>3</td>
+<td><a href="https://arxiv.org/abs/2406.16341">EHRCon</a></td>
+<td><a href="https://github.com/dustn1259/EHRCon">link</a></td>
+</tr>
+<tr>
+<td>MIMIC-Extract</td>
+<td>Tabular</td>
+<td>3</td>
+<td><a href="https://dl.acm.org/doi/abs/10.1145/3368555.3384469">MIMIC-Extract</a></td>
+<td><a href="https://github.com/MLforHealth/MIMIC_Extract">link</a></td>
+</tr>
+<tr>
+<td>N-PowerAI</td>
+<td>Text</td>
+<td>6</td>
+<td><a href="https://www.biorxiv.org/content/10.1101/2025.02.06.636776v1.abstract">NPowerAI</a></td>
+<td>-</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="data">Data</h2>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>All our prepared data can be downloaded through <a href="https://github.com/night-chen/MedAgentGym/blob/main/download_data.py">a download script</a> on GitHub. The script can help pull all the data from a private HuggingFace repository owned by an anonymous account.</p>
+</div>
+<p>MedAgentGym focuses on verifiable medical reasoning tasks that benefit from code-based solutions. 
+Clinically, we prioritize tasks originating from real-world health-care scenarios and validated by a multi-disciplinary panel of healthcare experts.
+For example, MedAgentGym involves MIMIC-III and eICU in EHRSQL collected from 222 hospital staff members and annotated by human programmers. 
+Computationally, we integrate diverse biomedical coding tasks, ranging from structured medical information retrieval to open-ended biomedical research, ensuring comprehensive coverage and task diversity.</p>
+<p>To standardize tasks across various sources, each instance in MedAgentGym is structured with: (1) a problem description, (2) verifiable ground-truth outputs, and (3) optional data resources (e.g., EHRs). 
+Additionally, standardized system and user prompts are designed to initiate the problem-solving process. 
+MedAgentGym is highly flexible, easily accommodating new tasks that include clear descriptions and verifiable ground-truth outputs. For coding-centric with only code solutions (e.g., BioCoder), we perform verification based on the execution output of provided code solution, which are more reliable than code alone. For tasks involving additional data resources (e.g., EHRSQL), we include metadata on data access and sources. Additional task-specific preparation details are documented.</p>
+<p>Typically, each dataset must comprises 2 files: <code>train_tasks.jsonl</code>, <code>test_tasks.jsonl</code>. 
+Besides, according to the task type, you should also add the required data sources that agent need to access during coding into the dataset directory.
+For example, if the dataset is data base related task, you should include data base files <code>*.csv</code>, or the SQL-integrated version <code>*.db</code>, so that the agent can access the data during coding.
+If the dataset is a machine learning task, that requires to predict specific labels given the training features, you should include the training features and labels in the directory as well.
+In EHRShot and MIMIC-Extract, we both provide the pickled features in <code>*.pkl</code> files and save the labels into <code>*.csv</code> files.
+Aside from the individual dataset files, we also provide a <code>metadata.json</code> file that contains the metadata of all the datasets, including total number of tasks for training and testing.</p>
+Each <code>*_tasks.csv</code> file contains two columns:
+<ul>
+<li><code>idx</code>: A unique identifier of the query sample in the task. Typically used for debug and reproducibility.</li>
+<li><code>question</code>: A question that is prompted to the model. The question is testing the model's code-based reasoning capabilities in solving bio-statistics or biomedcal computational problems.</li>
+<li><code>answer</code>: A verifiable answer to the question. We do not require the intermediate solution or ground-truth code snippets. 
+For those computational problems, we directly use the ground-truth answer.
+For coding problems offering ground-truth solutions, we execute their code in advance and use the execution results as the final answer.
+We do not use the code, because we want the model to generate diverse and creative solutions when coding to solve problems. </li>
+</ul>
+For a practical example, visit the <a href="train.python/">example</a> page.</p>
+<h2 id="experimental-results">Agent Scaffolds</h2>
+<p>Following <a href="https://arxiv.org/abs/2402.01030">CodeAct</a>, we introduce a default agent scaffold designed for systematic evaluation of coding-based medical reasoning. 
+Interactions within MedAgentGYM are formulated as a Partially Observable Markov Decision Process (POMDP), where tasks are represented as medical reasoning problems sampled from a set \(P\). 
+At each timestep \(t\), the agent receives an observation \(o_t\in\mathcal{O}\) and determines the next action \(a_{t+1}\in\mathcal{A}) based on the interaction history.</p>
+<ul>
+<li><code>request_info</code>: Retrieves relevant data from external sources such as Electronic Health Records (EHRs).</li>
+<li><code>terminal</code>: Handles dependencies or manages local files within isolated Docker environments.</li>
+<li><code>code execution</code>: Executes code generated by Large Language Models (LLMs) through an integrated interpreter.</li>
+<li><code>debugging</code>: Converts code execution errors into comprehensible natural language explanations, enriched with detailed error information to enhance LLM understanding.</li>
+</ul>
+<p>Additional details can be found in <a href="https://github.com/night-chen/MedAgentGym/tree/main/ehr_gym/env/action">./env/action/</a> directory.</p>
+<!-- <h2 id="ongoing-works-active-learning">Ongoing Works: Active Learning</h2>
+<p>We are developing code to integrate <em>active learning</em> into the pipeline.
+Specifically, we assume we have a small set of labeled data points (<code>--n_init_instances</code>) at the beginning.
+Within each active learning iteration, we use the labeled dataset to fine-tune the model parameters and select a batch of data points (<code>--n_al_select</code>) from the unlabeled set with the least predicted certainty (<em>i.e.</em>, max predicted entropy for classification and max predicted variance for regression).
+The process is repeated for several loops (<code>--n_al_loops</code>), and the intermediate performance is tracked.</p>
+<p>The code is still under construction and currently is <strong>only available under the <code>dev</code> branch</strong>.
+In addition, several points are worth attention:</p>
+<ul>
+<li>Currently, only DNN and ChemBERTa backbones are supported (<code>./run/dnn_al.py</code> and <code>./run/chemberta_al.py</code>). Migrating AL to other backbones is not difficult but requires updating some Trainer functions if they are reloaded.</li>
+<li>To enable active learning, make sure you set <code>--enable_active_learning</code> to <code>true</code>.</li>
+<li>Currently, Deep Ensembles is not supported for AL.</li>
+<li>We cannot guarantee the correctness of our implementation. If you notice any abnormalities in the code, please do not hesitate to post an issue.</li>
+</ul>
+<p>One example is</p>
+<pre><code class="language-bash">python ./run/dnn_al.py \
+  --enable_active_learning \
+  --n_init_instances 100 \
+  --n_al_loops 20 \
+  --n_al_select 20 \
+  # other model and training hyper-parameters...
+</code></pre> -->
+<h2 id="citation">Citation</h2>
+<p>If you find our work helpful, please consider citing it as</p>
+<pre><code class="language-latex">@misc{medagentgym2025,
+    title={Incentivizing Coding Capability in LLM Agents for Medical Reasoning with MedAgentGYM},
+    author={Anonymous Authors},
+    year={2025}
+}
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="env/" class="btn btn-neutral float-right" title="Environment">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+      <span><a href="env/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = ".";</script>
+    <script src="js/theme_extra.js"></script>
+    <script src="js/theme.js"></script>
+      <script src="search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

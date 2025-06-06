@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>medagentgym.args - MedAgentGym - Documentation</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "medagentgym.args";
+        var mkdocs_page_input_path = "medagentgym.args.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> MedAgentGym - Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">About</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../env/">Environment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../train.cli/">Running Experiments</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MedAgentGym API</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">medagentgym.args</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#class-descriptorarguments">Arguments</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#class-config">functions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#function-from_args">function parse_arguments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#function-get_meta">function get_task_class</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#function-load">function sequential_run_experiments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#function-log">function async_run_experiments/a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#function-save">function load_credentials</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.agent/">medagentgym.agent</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.env/">medagentgym.env</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.llm/">medagentgym.llm</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.utils/">medagentgym.utils</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../customize/">Customization</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">MedAgentGym - Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">MedAgentGym API</li>
+      <li class="breadcrumb-item active">medagentgym.args</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <!-- markdownlint-disable -->
+
+<h1 id="module-mubenargs"><kbd>module</kbd> <code>medagentgym.args</code></h1>
+<p>This script is designed to manage and execute experiments in the MedAgentGym environment, supporting both sequential and parallel (async) execution modes over multiple biomedical-related tasks. </p>
+<p><strong>Features:</strong></p>
+<ul>
+<li>Flexible command-line interface for specifying experiment configuration</li>
+<li>Supports multiple EHR task environments (e.g., MIMIC-III, BioCoder, MedAgentBench, etc.)</li>
+<li>Seamless integration with different parallel execution backends (ray, joblib)</li>
+<li>Experiment management: resume, skip completed, track results</li>
+<li>Environment credential management via TOML</li>
+<li>Automatic configuration and result directory setup</li>
+<li>Logging and error handling for robust execution</li>
+</ul>
+<p>This module defines base classes for handling arguments and configurations across the application. It includes classes for model descriptor arguments, general arguments, and configurations that encompasses dataset, model, and training settings. </p>
+<hr />
+<h2 id="class-descriptorarguments"><kbd>class</kbd> <code>Command-line Arguments</code></h2>
+<p>Experiment-running arguments through command lines. </p>
+<p>This class holds the arguments related to the experiment running of the model. </p>
+<p><strong>Attributes:</strong></p>
+<ul>
+<li><b><code>config_path</code></b> (str):  The path to the experiment config file (YAML or JSON). Default is None. </li>
+<li><b><code>task</code></b> (str):  Name of the biomedical task to run (e.g., mimic_iii, biocoder, etc.). Default is None. </li>
+<li><b><code>credential_path</code></b> (str):  Path to TOML file with environment credentials. Default is "<code>./credentials.toml</code>". </li>
+<li><b><code>work_dir</code></b> (str):  Working directory for outputs and logs. Default is "<code>./work_dir/</code>". </li>
+<li><b><code>result_dir_tag</code></b> (str):  Suffix tag for result directory. Default is None. </li>
+<li><b><code>start_idx</code></b> (int):  Start index for experiment runs. Default is 0.</li>
+<li><b><code>end_idx</code></b> (int):  End index (exclusive) for experiment runs. Default is -1 (indicating using the entire set). </li>
+<li><b><code>num_steps</code></b> (int):  Number of steps per episode. Default is 30. </li>
+<li><b><code>async_run</code></b> (bool):  Whether to run experiments in parallel. Default is False. The experiments will be run sequentially by default.</li>
+<li><b><code>n_jobs</code></b> (int):  Number of run experiments in parallel. Default is 5. The argument only works when the <code>--async_run</code> argument is activated. </li>
+<li><b><code>parallel_backend</code></b> (str):  Backend for parallelism (ray or joblib). </li>
+<li><b><code>mode</code></b> (str):  Run mode (train or test). </li>
+</ul>
+<hr />
+<h3 id="class-config"><kbd>function</kbd> <code>parse_arguments()</code></h2>
+<pre><code class="language-python">parse_arguments():
+</code></pre>
+<p>Handles all command-line inputs, allowing both config-based and CLI-based configuration. Command-line arguments override config file values.</p>
+<hr />
+<h3 id="function-from_args"><kbd>function</kbd> <code>get_task_class(task):</code></h3>
+<p>Maps task names to the appropriate environment class dynamically, allowing flexible extension for new tasks.</p>
+<hr />
+<h3 id="function-get_meta"><kbd>function</kbd> <code>run_single_experiment(args, config, idx)</code></h3>
+<pre><code class="language-python">run_single_experiment(args, config, idx):
+</code></pre>
+<p>Runs a single experiment episode: </p>
+<p><strong>Args:</strong></p>
+<ul>
+<li>Instantiates environment and agent. </li>
+<li>Resumes or skips completed runs.</li>
+<li>Executes agent step loop with retry on error actions.</li>
+<li>Records and saves conversation history and result</li>
+</ul>
+<hr />
+<h3 id="function-load"><kbd>function</kbd> <code>sequential_run_experiments</code></h3>
+<pre><code class="language-python">sequential_run_experiments(args, config):
+</code></pre>
+<p>Runs experiments one-by-one for the specified index range.</p>
+<hr />
+<h3 id="function-log"><kbd>function</kbd> <code>async_run_experiments</code></h3>
+<pre><code class="language-python">async_run_experiments(args, config, n_jobs, parallel_backend="ray")
+</code></pre>
+<p>Runs experiments in parallel, supporting either Ray or joblib as backend. Handles job initialization, collection, and logging.</p>
+<hr />
+<h3 id="function-save"><kbd>function</kbd> <code>load_credentials</code></h3>
+<pre><code class="language-python">load_credentials()
+</code></pre>
+<p>Loads environment secrets from a TOML file and injects them as environment variables.</p>
+<!-- <hr />
+<h3 id="function-validate"><kbd>function</kbd> <code>validate</code></h3>
+<pre><code class="language-python">validate()
+</code></pre>
+<p>Validate the configuration. </p>
+<p>Checks for argument conflicts and resolves them if possible, issuing warnings for any discrepancies found. Ensures that the model name, feature type, and uncertainty methods are compatible with the specified task type. </p>
+<p><strong>Raises:</strong></p>
+<ul>
+<li><b><code>AssertionError</code></b>:  If an incompatible configuration is detected that cannot be automatically resolved. </li>
+</ul> -->
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../overview/" class="btn btn-neutral float-left" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../muben.layers/" class="btn btn-neutral float-right" title="muben.layers">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../overview/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../muben.layers/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

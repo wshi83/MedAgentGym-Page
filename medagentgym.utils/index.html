@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>medagentgym.utils - MedAgentGym - Documentation</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "medagentgym.utils";
+        var mkdocs_page_input_path = "medagentgym.utils.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> MedAgentGym - Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">About</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../env/">Environment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../train.cli/">Running Experiments</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MedAgentGym API</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.args/">medagentgym.args</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.env/">medagentgym.env</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.llm/">medagentgym.llm</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.agent/">medagentgym.agent</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">medagentgym.utils</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#run-exp">function run_exp</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#parse">function parse_and_truncate_error</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#timeout">function _episode_timeout</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#poll">function poll_for_timeout</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#time">function get_elapsed_time</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#graph">function execute_task_graph</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#module-io">module io</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../customize/">Customization</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">MedAgentGym - Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">MedAgentGym API</li>
+      <li class="breadcrumb-item active">medagentgym.utils</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <!-- markdownlint-disable -->
+
+<h2 id="module-utils"><kbd>module</kbd> <code>medagentgym.utils</code></h1>
+<p>This Python module implements a Ray-based parallel execution framework for running experiments with built-in timeout management and dependency handling. The module ensures tasks that exceed allocated execution times are reliably cancelled, ensuring efficient utilization of computational resources.</p>
+<hr />
+<h3 id="run-exp"><kbd>function</kbd> <code>run_exp</code></h2>
+<pre><code class="language-python">run_exp(exp_arg, *dependencies, avg_step_timeout=60)
+</code></pre>
+<p>Purpose: Execute a given experimental argument (exp_arg) within the Ray distributed computing framework.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><b><code>exp_args</code></b>: The experiment argument object, which must implement a <code>run()</code> method.</li>
+<li><b><code>*dependencies</code></b>: Any dependencies that must complete before the experiment runs.</li>
+<li><b><code>avg_step_timeout</code></b> (default=60): Average time per step, used to compute timeouts (currently commented out).</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>Result of executing <code>exp_arg.run()</code>.</p>
+<p><strong>Usage:</strong></p>
+<p>Typically invoked as a Ray remote task.</p>
+<hr />
+<h3 id="parse"><kbd>function</kbd> <code>parse_and_truncate_error</code></h3>
+<pre><code class="language-python">parse_and_truncate_error(error_msg: str) -> str
+</code></pre>
+<p>Purpose: Clean and truncate error messages to ensure concise and informative outputs. </p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><code>error_msg</code>: Original error message string.</p></li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul>
+<li>Cleaned and truncated error message string.</li>
+</ul>
+<h3 id="timeout"><kbd>function</kbd> <code>_episode_timeout</code></h3>
+<pre><code class="language-python">_episode_timeout(exp_arg, avg_step_timeout=60)
+</code></pre>
+<p>Purpose: Calculate the maximum allowable runtime for an experiment based on provided arguments.</p>
+<p><strong>Arguments:</strong>
+<ul>
+<li><b><code>exp_arg</code></b>: Experiment argument object, possibly containing environment parameters.</li>
+<li><b><code>avg_step_timeout</code></b> (default=60): Average allowable time per experimental step.</li>
+</ul>
+<p><strong>Logic:</strong>
+<ul>
+<li>Uses <code>exp_args.env_args.max_steps</code> if available; otherwise, defaults to a global timeout of 10 hours.</li>
+</ul>
+<p><strong>Returns:</strong>
+<ul>
+<li>Timeout value in seconds.</li>
+</ul>
+<hr />
+<h3 id="poll"><kbd>function</kbd> <code>poll_for_timeout</code></h3>
+<pre><code class="language-python">poll_for_timeout(tasks: dict[str, ray.ObjectRef], timeout: float, poll_interval: float = 1.0)
+</code></pre>
+<p>Purpose: Monitor running tasks, cancelling any task exceeding the specified timeout period.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><b><code>tasks</code></b>: Dictionary mapping task IDs to their Ray object references.</li>
+<li><b><code>timeout</code></b>: Maximum allowable execution time in seconds for any task.</li>
+<li><b><code>poll_interval</code></b> (default=1.0): Interval for checking task status.</li>
+</ul>
+<p><strong>Operation:</strong></p>
+<ul>
+  <li>regularly polls tasks using <code>ray.wait()</code>.</li>
+  <li>Checks elapsed time for running tasks, invoking cancellable or forced termination if timeout is exceeded.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>Dictionary mapping task IDs to their respective execution results or exceptions.</p>
+<hr />
+<h3 id="time"><kbd>function</kbd> <code>get_elapsed_time</code></h3>
+<pre><code class="language-python">get_elapsed_time(task_ref: ray.ObjectRef)
+</code></pre>
+<p>Purpose: Retrieve the elapsed execution time for a given Ray task.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><code>task_ref</code>: Ray object reference of the task.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul>
+<li>Elapsed time in seconds if task has started; otherwise, None.</li>
+</ul>
+<p><strong>Details:</strong></p>
+<ul>
+<li>Utilizes Ray state API to determine task start time.</li>
+</ul>
+<hr />
+<h3 id="graph"><kbd>function</kbd> <code>execute_task_graph</code></h3>
+<pre><code class="language-python">execute_task_graph(exp_args_list, avg_step_timeout=60)
+</code></pre>
+<p>Purpose: Orchestrate execution of a graph of tasks, respecting task dependencies and managing overall execution timeout. </p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><b><code>exp_args_list</code></b>: List of experiment argument objects, each potentially specifying dependencies (<code>depends_on</code>).</li>
+<li><b><code>avg_step_timeout</code></b> (default=60): Average step timeout for each task.</li>
+</ul>
+<p><strong>Workflow:</strong></p>
+<ul>
+<li>Constructs task dependencies into a map.</li>
+<li>Initiates Ray remote tasks respecting their dependencies.</li>
+<li>Calculates maximum global timeout across all tasks and monitors execution.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul>
+<li>Results dictionary from executed tasks, keyed by their experiment IDs.</li>
+</ul>
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../medagentgym.llm/" class="btn btn-neutral float-left" title="medagentgym.train"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../customize/" class="btn btn-neutral float-right" title="Customization">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../medagentgym.llm/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../customize/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

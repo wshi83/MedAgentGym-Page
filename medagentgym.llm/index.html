@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>medagentgym.llm - MedAgentGym - Documentation</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "medagentgym.llm";
+        var mkdocs_page_input_path = "medagentgym.train.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> MedAgentGym - Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">About</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../env/">Environment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../train.cli/">Running Experiments</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MedAgentGym API</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.args/">medagentgym.args</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.args/">medagentgym.args</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.agent/">medagentgym.agent</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">medagentgym.llm</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chat-api">LLM Chat API</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#utility-function">Utility Functions</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#abstract">Abstract Classes and Interfaces</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#concrete">Concrete Model Arguments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#chat-model">Chat Model Implementations</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#usage-example">Usage Example</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.utils/">medagentgym.utils</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../customize/">Customization</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">MedAgentGym - Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">MedAgentGym API</li>
+      <li class="breadcrumb-item active">medagentgym.llm</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <!-- markdownlint-disable -->
+
+<h1 id="chat-api"><kbd>module</kbd> <code>LLM Chat API</code></h1>
+<p>The EHRGym Chat API module provides an abstraction layer for interacting with various language models (LLMs), including OpenAI, Azure-hosted models, and locally-hosted vLLM models. It offers utility functions to manage and structure chat-based interactions through a standardized interface.</p>
+<hr />
+<h2 id="utility-function"><kbd>Utility Functions</h2>
+  <ul>
+    <li><b><code>make_system_message(content: str)</code></b>: Creates a system message dict.</li>
+    <li><b><code>make_user_message(content: str)</code></b>: Creates a user message dict.</li>
+    <li><b><code>make_assistant_message(content: str)</code></b>: Creates an assistant message dict.</li>
+  </ul>
+<h3 id="abstract">Abstract Classes and Interfaces</h3>
+<h4 id="abstract-1"><code>AbstractChatModel</code></h4>
+<p>An abstract base class defining the interface for chat model implementations.</p>
+<p><strong>Methods: </strong></p>
+<ul>
+<li><b><code>__call__(self, messages: list[dict]):</code></b> Abstract method for generating responses based on message history.</li>
+<li><b><code>get_stats(self):</code></b> Returns statistics from the model's operation (e.g., retry counts).</li>
+</ul>
+<h4 id="abstract-2"><code>BaseModelArgs</code></h4>
+<p>Abstract dataclass defining configuration parameters for all model types.</p>
+<p><strong>Fields:</strong></p>
+<ul>
+<li><b><code>model_name</code></b> (str):  Name or identifier of the model. </li>
+<li><b><code>max_total_tokens</code></b> (int):  Total token limit. </li>
+<li><b><code>max_input_tokens</code></b> (int):  Input token limit. </li>
+<li><b><code>max_new_tokens</code></b> (int):  Token limit for newly generated content. </li>
+<li><b><code>temperature</code></b> (Float):  Controls randomness in generation. </li>
+<li><b><code>vision_support</code></b> (Boolean):  Indicates if the model supports visual input. </li>
+<li><b><code>log_probs</code></b> (Boolean):  Whether to log token probabilities. </li>
+</ul>
+<p><strong>Methods:</strong></p>
+<ul>
+<li><b><code>make_model(self)</code></b>: Abstract method to instantiate specific chat models.</li>
+</ul>
+<hr />
+<h3 id="concrete">Concrete Model Arguments</h3>
+<h4 id="concrete-1"><code>OpenAIModelArgs</code></h4>
+<p>Configures an OpenAI-hosted chat model. </p>
+<p><strong>Methods:</strong></p>
+<ul>
+<li><b><code>make_model(self)</code></b>: Instantiates an OpenAI chat model. </li>
+</ul>
+<h4 id="concrete-2"><code>AzureModelArgs</code></h4>
+<p>Configures an Azure-hosted chat model. </p>
+<p><strong>Fields:</strong></p>
+<ul>
+<li><b><code>deployment_name</code></b>: Azure-specific deployment name.</li>
+</ul>
+<p><strong>Methods:</strong></p>
+<ul>
+<li><b><code>make_model(self)</code></b>: Instantiates an Azure chat model.</li>
+</ul>
+<h4 id="concrete-3"><code>vLLMModelArgs</code></h4>
+<p>Configures an locally-hosted vLLM model. </p>
+<p><strong>Fields:</strong></p>
+<ul>
+<li><b><code>port</code></b>: Port number for the local vLLM server.</li>
+</ul>
+<p><strong>Methods:</strong></p>
+<ul>
+<li><b><code>make_model(self)</code></b>: Instantiates a locally-hosted vLLM chat model.</li>
+</ul>
+<h3 id="chat-model">Chat Model Implementations</h3>
+<h4 id="chat-1"><code>ChatModel</code></h4>
+<p>Base implementation for interacting with chat-based APIs.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><b><code>port</code></b>: Model configuration parameters, retry management, logging probabilities, and API credentials.</li>
+</ul>
+<p><strong>Methods:</strong></p>
+<ul>
+<li><b><code>__call__(self, messages: list[dict], n_samples: int, temperature: Optional[float])</code></b>: Executes chat interactions with retry logic and error handling.</li>
+<li><b><code>get_stats(self)</code>: Retrieves retry statistics.
+</ul>
+<h4 id="chat-2">Specialized Chat Models</h4>
+<ul>
+<li><b><code>OpenAIChatModel</code></b>: Subclass tilored for OpenAI API interactions.</li>
+<li><b><code>AzureChatModel</code></b>: Subclass tailored for Azure OpenAI service interactions, incorporating Azure-specific configurations such as deployment names and endpoints.</li>
+<li><b><code>vLLMChatModel</code></b>: Subclass for local vLLM server interactions, configurable via local ports.</li>
+</ul>
+<h3 id="usage-example">Usage Example</h3>
+<pre><code class="language-python">model_args = AzureModelArgs(
+    model_name="gpt-4",
+    temperature=0.5,
+    max_new_tokens=512,
+    deployment_name="gpt4-azure-deployment",
+    log_probs=False
+)
+model = model_args.make_model()
+
+response, cost = model([
+    make_system_message("You are an assistant."),
+    make_user_message("Summarize the key points of diabetes management.")
+])
+</code></pre> 
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../medagentgym.env/" class="btn btn-neutral float-left" title="medagentgym.env"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../medagentgym.utils/" class="btn btn-neutral float-right" title="medagentgym.utils">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../medagentgym.dataset/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../medagentgym.utils/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

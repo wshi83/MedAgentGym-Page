@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>medagentgym.agent - MedAgentGym - Documentation</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "medagentgym.agent";
+        var mkdocs_page_input_path = "medagentgym.agent.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> MedAgentGym - Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">About</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../env/">Environment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../train.cli/">Running Experiments</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MUBen API</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.args/">medagentgym.args</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.env/">medagentgym.env</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.llm/">medagentgym.llm</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">medagentgym.agent</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#function-pack_instances">class LLMConfig</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#function-unpack_instances">class MedAgentClass </a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#class-batch">class act</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#function-__init__">Process Flow</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#function-to">Error Handling</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#class-dataset">Usage Example</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../muben.train/">muben.train</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../muben.utils/">muben.utils</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../customize/">Customization</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">MedAgentGym - Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">MedAgentGym API</li>
+      <li class="breadcrumb-item active">medagentgym.agent</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <!-- markdownlint-disable -->
+
+<h1 id="module-mubendataset"><kbd>module</kbd> <code>medagentgym.agent</code></h1>
+<p>The MedAgent class serves as an agent designed to interact with Electronic Health Record (EHR) environments using Large Language Models (LLMs). 
+It dynamically selects appropriate model configurations, manages conversation history, and processes environment observations to generate relevant actions based on permitted actions. </p>
+<hr />
+<h2 id="function-pack_instances"><kbd>dataclass</kbd> <code>LLMConfig</code></h2>
+<p>A dataclass defining basic configuration parameters for the LLM: </p>
+<p><strong>Args:</strong></p>
+<ul>
+<li><b><code>model_path</code></b> (str):  Path to the LLM model. </li>
+<li><b><code>tokenizer_path</code></b> (str): Path to the tokenizer. </li>
+<li><b><code>max_length</code></b> (int): Maximum token length for generated sequences.</li>
+<li><b><code>device</code></b> (str): Device specifcation (e.g., "cpu", "cuda"). </li>
+<li><b><code>port</code></b> (int): Network port for model deployment (used primarily for <code>vLLM</code>). The default value is 8000.</li>
+</ul>
+<h2 id="function-unpack_instances"><kbd>class</kbd> <code>MedAgentClass</code></h2>
+<p>Initialization: Initializes the agent with the provided configuration and permitted actions: </p>
+<ul>
+<li><b><code>agent_config</code></b> (dict):  Configuration dictionary containing model specifications, retry logic, and other operational parameters. </li>
+<li><b><code>permitted_actions</code></b> (list):  List of permitted actions the agent can perform. </li>
+</ul>
+<p>The initialization dynamically sets up an LLM model based on the specified type (<code>OpenAI</code>, <code>Azure</code>, or <code>vLLM</code>). It also initializes:</p>
+<ul>
+<li>Conversation history management. </li>
+<li>Prompt handling with <code>DynamicPrompt</code>.</li>
+<li>LLM response parsing.</li>
+<li>Cost tracking.</li>
+</ul>
+<p>Supported LLM Types:</p>
+<ul>
+<li><code>OpenAI</code>: Standard OpenAI models.</li>
+<li><code>Azure</code>: Azure-hosted models with configurable deployment parameters.</li>
+<li><code>vLLM</code>: Locally hosted vLLM instances on specific ports.</li>
+</ul>
+<p>Raises an error if an unsupported model type is provided.</p>
+<hr />
+<h2 id="class-batch"><kbd>class</kbd> <code>act</code></h2>
+<pre><code class="language-python">act(obs: Any) -> Tuple[str, Dict[str, Any]]
+</code></pre>
+<p>Generates actions based on the observation (obs) from the MedAgentGym environment</p>
+<p>Input: </p>
+<ul>
+<li><b>obs</b> (dict): A dictionary containing keys such as <code>info</code> and <code>env_message></code>. Typically includes the current instruction, task goals, or environment feedback.</li>
+</ul>
+<p>Output: Returns a tuple</p>
+<ul>
+<li><b><code>action</code></b> (str):  Action identified by the LLM based on observations and conversation history. </li>
+<li><b><code>params</code></b> (dict):  Additional parameters or details associated with the action. </li>
+</ul>
+<h2 id="function-__init__">Process Flow</h2>
+<p>Initialization of Conversation: On first interaction: </p>
+<ul>
+<li>Extracts and formats permitted actions.</li>
+<li>Constructs a prompt from <code>instruction</code>, <code>action_definitions</code>, and <code>action_formats</code>.</li>
+<li>Initializes the conversation history with system and user messages based on the LLM type.</li>
+</ul>
+<p>LLM Interaction:</p>
+<ul>
+<li>Attempts LLM invocation, retrying up to <code>n_retry</code> times upon failure.</li>
+<li>Logs errors and appends error handling messages to the conversation history.</li>
+</ul>
+<p>Response Parsing:</p>
+<ul>
+<li>Parses response using <code>parse_llm_response</code>.</li>
+<li>Adds parsed actions and response to conversation history.</li>
+</ul>
+<p>Error Handling:</p>
+<ul>
+<li>Handles exceptions in parsing and LLM response generation gracefully by retrying and appending error messages.</li>
+</ul>
+<hr />
+<h3 id="function-to">Error Handling</h3>
+<ul>
+<li>implements retries upon encountering exceptions.</li>
+<li>Delays retries based on <code>retry_delay</code> specified in the agent configuration.</li>
+<li>Logs detailed error messages to aid debugging.</li>
+</ul>
+<h2 id="class-dataset">Usage Example</h2>
+<pre><code class="language-python">agent_config = {
+    'llm': {
+        'model_type': 'Azure',
+        'model_name': 'gpt-4.1-mini',
+        'temperature': 0.0,
+        'max_new_tokens': 8192,
+        'deployment_name': 'gpt-4.1-mini',
+        'log_probs': False
+    },
+    'n_retry': 3,
+    'retry_delay': 10
+}
+permitted_actions = ['retrieve', 'update', 'submit']
+agent = EHRAgent(agent_config, permitted_actions)
+obs = {
+    'info': {'instruction': 'Retrieve patient data', 'task_goal': 'Get recent medical records'},
+    'env_message': 'Patient ID 1234'
+}
+action, params = agent.act(obs)
+</code></pre>
+<p>This documentation covers the essential methods, configuration options, and detailed error-handling processes within the EHRAgent class for effective integration and utilization.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../muben.layers/" class="btn btn-neutral float-left" title="muben.layers"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../muben.train/" class="btn btn-neutral float-right" title="muben.train">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../muben.layers/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../muben.train/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

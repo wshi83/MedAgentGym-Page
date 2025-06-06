@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>medagentgym.env - MedAgentGym - Documentation</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "medagentgym.env";
+        var mkdocs_page_input_path = "medagentgym.env.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> MedAgentGym - Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">About</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../env/">Environment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../train.cli/">Running Experiments</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MedAgentGym API</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.args/">medagentgym.args</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">medagentgym.env</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#class-outputlayer">function</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#function-__init__">function send_msg_to_user</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#function-forward">function report_infeasible</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#function-initialize">function request_info</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#run-code-file">function _run_code_file</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#validate-code">function validate_code</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#debug">function debug</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#terminal">function terminal</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#class-env">MedAgentEnv</a>
+    <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#function-reset">function reset</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#function-step">function step</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#function-task-validate">function _task_validate</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#function-get-obs">function _get_obs</a>
+    </li>
+    </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.agent/">medagentgym.agent</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.llm/">medagentgym.llm</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.utils/">medagentgym.utils</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../customize/">Customization</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">MedAgentGym - Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">MedAgentGym API</li>
+      <li class="breadcrumb-item active">medagentgym.env</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <!-- markdownlint-disable -->
+
+<h1 id="module-mubenlayers"><kbd>module</kbd> <code>medagentgym.env</code></h1>
+<p>Versatile Output Layer for Backbone Models </p>
+<p>This module implements an output layer that can be applied to various backbone models. It provides the option of utilizing different uncertainty  methods for model's output and supports both classification and regression tasks. </p>
+<hr />
+<h2 id="class-outputlayer">function</h2>
+<p>This Python module provides a suite of utility functions intended to facilitate interactions and operations within a medical reasoning environment. 
+It encompasses functionalities ranging from information retrieval from data sources, code execution and validation, debugging assistance, and terminal command execution. </p>
+<h3 id="function-__init__"><kbd>function</kbd> <code>send_msg_to_user</code></h3>
+<pre><code class="language-python">send_msg_to_user(text: str)
+</code></pre>
+<p>Sends a user-facing message. Useful for providing informative updates or responses based on operations performed by the agent. </p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-python">send_msg_to_user("Based on the results of my search, the city was built in 1960.")
+</code></pre>
+<hr />
+<h3 id="function-forward"><kbd>function</kbd> <code>report_infeasible</code></h3>
+<pre><code class="language-python">report_infeasible(text: str)
+</code></pre>
+<p>Reports instructions that cannot be executed, notifying the user.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-python">send_msg_to_user("Based on the results of my search, the city was built in 1960.")
+</code></pre>
+<hr />
+<h3 id="function-initialize"><kbd>function</kbd> <code>request_info</code></h3>
+<pre><code class="language-python">request_info(data_path: str, info_type: str, keyterm: str) -> str
+</code></pre>
+<p>Retrieves specific information from a given data source, primarily CSV files. </p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><b><code>data_path</code></b>: Path to data (file or directory).</li>
+<li><b><code>info_type</code></b>: Type of requested info (e.g., 'column_names', 'column_values', or 'term').</li>
+<li><b><code>keyterm</code></b>: Keyword or column to search.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul>
+<li><b><code>Output</code></b>:  A formatted string containing relevant information or suggestions for next steps. </li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class="language-python">request_info("./mimic_iii/", "term", "aspirin")
+</code></pre> 
+<h3 id="run-code-file"><kbd>function</kbd> <code>_run_code_file</code></h3>    
+<pre><code class="language-python">_run_code_file(code_file: Path, timeout: Optional[int]) -> Tuple[int, str, str, float]
+</code></pre> 
+<p>Executes a Python file with a specified timeout and provides detailed execution feedback.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><b><code>code_file</code></b>: Path to the Python script to execute.</li>
+<li><b><code>timeout</code></b>: Maximum execution time in seconds.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li>Tuple containing return code, stdout, stderr, and execution duration.</li>
+</ul>
+<h3 id="validate-code"><kbd>function</kbd> <code>validate_code</code></h3> 
+<pre><code class="language-python">validate_code(code: str) -> Dict[str, Any]
+</code></pre>  
+<p>Validates Python code by compilation and execution, providing comprehensive results or errors.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><b><code>code</code></b>: Python code to validate.</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<pre><code class="language-python">validate_code("import numpy as np\na=[1,2,3]\nans=np.mean(a)")
+</code></pre> 
+<h3 id="debug"><kbd>function</kbd> <code>debug</code></h3> 
+<pre><code class="language-python">debug(code, error_msg, debugger, history) -> Dict[str, Any]
+</code></pre> 
+<p>Facilitates debugging of Python code by summarizing context and suggesting solutions using a provided debugging interface.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><b><code>code</code></b>: Python code snippet to debug.</li>
+<li><b><code>error_msg</code></b>: Error message encountered during code execution.</li>
+<li><b><code>debugger</code></b>: Debugging interface to use for suggestions.</li>
+<li><b><code>history</code></b>: History of previous interactions for context.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li>Dictionary containing the original code, error message, and debugging suggestions.</li>
+</ul>
+<h3 id="terminal"><kbd>function</kbd> <code>terminal</code></h3>
+<pre><code class="language-python">terminal(cmd: str) -> Dict[str, Any]
+</code></pre>
+<p>Executes a command in the system terminal and provides feedback.</p>
+<p><strong>Arguments</strong>:</p>
+<ul>
+<li><b><code>cmd</code></b>: Terminal command to execute.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<p>Dictionary containing command execution status, output message, and execution time.</p>
+<p><strong>Example</strong>:</p>
+<pre><code class="language-python">terminal("ls -l")
+</code></pre>
+  <hr/>
+<h2 id="function-env"><kbd>class</kbd> <code>MedAgentEnv</code></h2>
+<p><code>MedAgentEnv</code> is a Gymnasium environment class designed for encapsulating coding-based medical reasoning tasks. 
+It supports interactions through a structured action-observation loop, enabling reinforcement learning agents to execute tasks based on medical data.</p>
+<p><strong>Class Definition</strong>:</p>
+<p><code>MedAgentEnv(gym.Env, ABC)</code></p>
+<ul>
+  <li><b>Inherits:</b> <code>gym.Env</code>, <code>ABC</code></li>
+  <li><b>Purpose:</b> Provides a structured Gymnasium environment tailored for coding-based biomedical reasoning tasks.</li>
+</ul>
+<p><strong>Initialization Parameters</strong>:</p>
+<ul>
+<li><b>task_entrypoint</b> (<code>type[AbstractMedAgentTask]</code>): A class or callable returning a task instance based on provided task IDs.</li>
+<li><b>task_kwargs</b> (<code>dict</code>): Dictionary containing task-specific configurations (e.g., data paths, debugger settings).</li>
+<li><b>action_mapping</b> (<code>Optional[Callable]</code>): Function mapping action strings to executable Python functions (default: <code>BasicActionSet().action_set</code>).</li>
+</ul>
+<p><strong>Attributes</strong>:</p>
+<ul>
+<li><b>observation_space</b> (<code>gym.spaces.Dict</code>): Defines the structure and type of the environment's observations, including chat messages, task goals, historical actions, and elapsed time.</li>
+<li><b>action_space</b> (<code>gym.spaces.Unicode</code>): Specifies the action type expected by the environment.</li>
+<li><b>chat</b> (<code>Chat</code>): Handles the interaction history between the agent and the environment.</li>
+<li><b>terminate_on_infeasible</b> (<code>bool</code>): Controls automatic termination upon infeasible instructions.</li>
+<li><b>debugger</b>: instance of a configured debugging model.</li>
+<li><b>env_history</b> (<code>list</code>): Stores the historical sequence of environment observations.</li>
+<li><b>need_context</b> (<code>bool</code>): Flag indicating whether contextual information is required for code validation.</li>
+</ul>
+<h3 id="function-reset"><kbd>function</kbd> <code>reset</code></h3>
+<pre><code class="language-python">reset(task_id, *args, **kwargs)
+</code></pre>
+<p>Initializes or resets the environment to begin a new task.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>task_id</code>: Identifier for the specific task to initialize.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>obs</code>: Initial observation dictionary.</li>
+<li><code>info</code>: Dictionary containing task goal and initial task information.</li>
+</ul>
+<h3 id="function-step"><kbd>function</kbd> <code>step</code></h3>
+<pre><code class="language-python">step(action: str, **kwargs)
+</code></pre>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>action</code>: String specifying the action to execute.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>obs</code>: Resulting observation after executing the action.</li>
+<li><code>reward</code>: Numeric reward for the action taken.</li>
+<li><code>terminated</code>: Boolean indicating if the episode has terminated.</li>
+<li><code>truncated</code>: Boolean indicating if the episode was truncated prematurely.</li>
+<li><code>info</code>: Dictionary containing execution details and task-specific feedback.</li>
+</ul>
+<h3 id="function-task-validate"><kbd>function</kbd> <code>_task_validate</code></h3>
+<pre><code class="language-python">_task_validate(obs)
+</code></pre>
+<p>Validates task completion and calculates reward.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>obs</code>: Current observation after action execution.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>reward</code>: Numeric reward based on task completion criteria.</li>
+<li><code>done</code>: Boolean indicating task completion.</li>
+<li><code>user_message</code>: Message to the user upon task validation.</li>
+<li><code>task_info</code>: Additional validation details.</li>
+</ul>
+<h3 id="function-get-obs"><kbd>function</kbd> <code>_get_obs</code></h3>
+<pre><code class="language-python">_get_obs(results=None)
+</code></pre>
+<p>Generates the observation dictionary for the current environment state.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>results</code>: Optional data from the latest action execution.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li>Observation dictionary including environment messages and feedback.</li>
+</ul>
+<h3 id="usage-example">Usage Example</h3>
+<pre><code class="language-python">task_kwargs = {
+    "data_path": "./data",
+    "debugger_config": {
+        "model_name": "gpt-4",
+        "temperature": 0.1,
+        "max_new_tokens": 512,
+        "deployment_name": "debugger-model",
+        "log_probs": False
+    }
+}
+env = EHREnv(task_entrypoint=MyEHRTask, task_kwargs=task_kwargs)
+obs, info = env.reset(task_id="ehr_task_01")
+</code></pre>
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../medagentgym.args/" class="btn btn-neutral float-left" title="medagentgym"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../medagentgym.env/" class="btn btn-neutral float-right" title="medagentgym.env">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../medagentgym.args/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../medagentgym.env/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

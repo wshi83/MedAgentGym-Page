@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Running Experiments - MedAgentGym - Documentation</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Running Experiments";
+        var mkdocs_page_input_path = "train.cli.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> MedAgentGym - Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="..">About</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../env/">Environment</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Running Experiments</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#fine-tuning-the-models">Evaluation</a>
+        <!-- <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#specify-arguments-using-command-lines">Specify Arguments Using Command Lines</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#specify-arguments-using-yaml-files">Specify Arguments using .yaml Files</a>
+    </li>
+        </ul> -->
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#logging-and-wandb">Supervised Fine-Tuning</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#data-loading">Direct Preference Optimization</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#calculating-metrics">Iterative DPO</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MedAgentGym API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.args/">medagentgym.args</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.agent/">medagentgym.agent</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.env/">medagentgym.env</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.llm/">medagentgym.llm</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.utils/">medagentgym.utils</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../customize/">Customization</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">MedAgentGym - Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Introduction</li>
+      <li class="breadcrumb-item active">Running Experiments</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="running-experiments-on-cli">Running Experiments on CLI</h1>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Please ensure you have clone the repo and navigated to the <code>MedAgentGym/</code> directory in your local environment to begin working with the project.</p>
+</div>
+<p>The most straightforward approach to replicate our experimental results is using the python scripts provided in the MedAgentGym repo with the following pipeline.</p>
+<h2 id="fine-tuning-the-models">Evaluation</h2>
+<p>Currently, the script <a href="https://github.com/night-chen/MedAgentGym/blob/main/entrypoint.sh">./entrypoint.sh</a> is the entrypoint script to initiate the evaluation on each tasks.
+Users can modify the file to run any experiments reported in the paper. To evaluate a new model on the MedAgentGym, we should follow the instructions below: </p>
+<!-- <h3 id="specify-arguments-using-command-lines">Prepare Experimental Configurations</h3> -->
+<p>The <a href="https://github.com/night-chen/MedAgentGym/tree/main/configs">./config/</a> directory contains experimental configurations for each model.
+For example, we offer the evaluation configurations for the gpt-4.1-mini model on all the evaluation datasets in <a href="https://github.com/night-chen/MedAgentGym/tree/main/configs/gpt_4_1_mini">./config/gpt_4_1_mini/</a>.
+All the elements is to control the generator LLM configurations and hyperparameters used in the experimetns:</p>
+<pre><code class="language-bash">Agent:
+  llm:
+    model_type: "Azure"
+    model_name: "gpt-4.1-mini"
+    max_total_tokens: 32768
+    max_input_tokens: 8192
+    max_new_tokens: 8192
+    log_probs: False
+    temperature: 0.0
+    deployment_name: "gpt-4.1-mini"
+  n_retry: 3
+  retry_delay: 10
+Data:
+  metadata_path: "data/metadata.json"
+  data_path: "data/mimic_iii"
+Debugger:
+  model_type: "Azure"
+  model_name: "gpt-4.1-mini"
+  max_total_tokens: 32768
+  max_input_tokens: 8192
+  max_new_tokens: 2048
+  log_probs: False
+  temperature: 0.0
+  deployment_name: "gpt-4.1-mini"
+Env:
+  n_retry: 3
+task: "mimic_iii"
+credentials_path: "./credentials.toml"
+work_dir: "./workdir/gpt_4_1_mini"
+result_dir_tag: "train_gpt-4_1-mini-mimiciii"
+start_idx: 0
+end_idx: -1
+num_steps: 15
+</code></pre>
+<p>In the example, The provided configuration file specifies training details using the Azure-deployed GPT-4.1-mini language model for a task involving the MIMIC-III dataset. 
+The agent is configured to handle up to 32,768 total tokens, processing an input of up to 8,192 tokens and generating outputs up to 8,192 tokens, with deterministic behavior (temperature set to 0.0). 
+The agent includes a retry mechanism that attempts failed requests up to three times with a 10-second delay. 
+Data for training is sourced from the data/mimic_iii directory, guided by metadata located at data/metadata.json. 
+A similar GPT-4.1-mini configuration is employed for debugging, albeit with a lower maximum output token limit of 2,048. 
+The execution environment also incorporates three retries for robustness, and results are systematically organized under the directory tag train_gpt-4_1-mini-mimiciii within the specified working directory. 
+Training will utilize the entire dataset (from index 0 to the end) for 15 steps. Credentials needed for accessing resources are managed through the provided credentials.toml file.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>For the interpretation of each argument, please check the <a href="../medagentgym.args/"><code>medagentgym.args</code> API</a> or directly refer to the <a href="https://github.com/night-chen/MedAgentGym/blob/main/main.py">code implementation</a>.
+Notice that the API documentation may not be entirely comprehensive.</p>
+</div>
+<p>After preparing the configuration files, we need to add the experment-running scripts in the <code>entrypoint.sh</code> file. The script format should be as below:</p>
+<pre><code class="language-bash">python main.py --config /home/configs/medgemma-4b/mimic_iii.yaml --async_run --parallel_backend joblib --n_jobs 10
+</code></pre>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>For parallel experiments, the argument <code>--async_run</code> is vital to guarantee all the experiments are assigned to different threads and run simultaneously.
+If the argument is not listed, the code will run all the experiments sequentially by eefault.
+For the parallel backend engine, there are two choices: <code>joblib</code> and <code>ray</code>. It depends on the hardware condition of users.</p>
+</div>
+<p>To finally run the experiments, you need to run the command <code>sh test_docker.sh</code> instead of directly run the <code>entrypoint.sh</code> file, as the dockerfile has already included the entrypoint as pre-built function: </p>
+<pre><code class="language-bash">docker run \
+    --network host \
+    --shm-size=64g \
+    --gpus='"device=0"' \
+    -v <YOUR_PATH_TO_MEDAGENTGYM>/main.py:/home/main.py \
+    -v <YOUR_PATH_TO_MEDAGENTGYM>/rollout.py:/home/rollout.py \
+    -v <YOUR_PATH_TO_MEDAGENTGYM>/configs:/home/configs \
+    -v <YOUR_PATH_TO_MEDAGENTGYM>/cache:/home/cache \
+    -v <YOUR_PATH_TO_MEDAGENTGYM>/workdir:/home/workdir \
+    -v <YOUR_PATH_TO_MEDAGENTGYM>/entrypoint.sh:/home/entrypoint.sh \
+    -v <YOUR_PATH_TO_MEDAGENTGYM>/credentials.toml:/home/credentials.toml \
+    -e TASK_NAME="eicu" \
+    -it ehr_gym:latest
+</code></pre>
+<p>The motivation is to isolate the main functions of the MedAgentGym outside the docker to ensure safety and execution. Besides, if the docker has already been built and you are modifying the running commands, you can directly mount the new shell scripts into the docker.</p>
+<h2 id="logging-and-wandb">Supervised Fine-Tuning</h2>
+<p>By default, this project uses the <a href="https://github.com/volcengine/verl/tree/main">verl</a> package for supervised fine-tuning. 
+As the training trajectories contain multiple turns of interactions between LLM agents and environmental feedbacks. 
+We leverage multi-turn SFT of the package to train LLMs on multi-turn conversational datasets, enabling models to learn from full dialog exchanges rather than single-turn prompts.
+Under the hood, this is handled by a specialized dataset class (see <code>multiturn_sft_dataset.py</code>) that takes a list of role-tagged messages and formats them into a single input sequence using the model's chat template.</p>
+<p>In practice, to use this feature you can cactivate it in the training config: for example, the FSDP SFT trainer (<code>verl.trainer.fsdp_sft_trainer</code>) will switch to multi-turn mode when you set <code>data.multiturn.messages_key=conversations</code>.
+The <code>verl/examples/sft/multiturn</code> example demonstrates how to launch a multi-turn SFT run with these settings: pointing to your training dataset (such as a JSON/Parquet file of dialogues), defining model initialization (e.g., a base model checkpoint via <code>model.partial_pretrain</code>) and then running <code>torchrun -m verl.trainer.fsdp_sft_trainer</code> with the multi-turn flags enabled.
+This workflow allows researchers to easily fine-tune a model on multi-turn dialogues: the SFT trainer will automatically use the MultiTurnSFTDataset logic to prepare each converstaion turn as training samples and handle the labeling of the assistant responses, so you can plug in your own converstaional data and adapt the config (or Hydra overrides) to train custom multi-turn models with minimal code changes.
+Below is an example of the configuration file we leveraged to SFT the 7B model:</p>
+<pre><code class="language-bash">#!/bin/bash
+set -x
+
+nproc_per_node=$1
+save_path=$2
+
+# Shift the arguments so $@ refers to the rest
+shift 2
+export EXPERIMENT_NAME=qwen-3-7b-sft
+torchrun --standalone --nnodes=1 --nproc_per_node=$nproc_per_node \
+     -m verl.trainer.fsdp_sft_trainer \
+    data.train_files=/PATH_TO_DATA/train.parquet \
+    data.val_files=/PATH_TO_DATA/test.parquet \
+    data.multiturn.enable=true \
+    data.multiturn.messages_key=messages \
+    data.micro_batch_size=4 \
+    data.max_length=40000 \
+    model.partial_pretrain=Qwen/Qwen2.5-7B-Instruct \
+    model.enable_gradient_checkpointing=True \
+    trainer.default_local_dir=$save_path \
+    trainer.project_name=multiturn-sft \
+    trainer.experiment_name=qwen2.5-7b-sft \
+    trainer.logger=['console','wandb'] \
+    trainer.total_epochs=5 \
+    trainer.default_hdfs_dir=null $@ \
+    trainer.project_name=gym \
+    ulysses_sequence_parallel_size=2 \
+    trainer.experiment_name=$EXPERIMENT_NAME \
+    optim.lr=1e-4 \
+    use_remove_padding=true \
+    +model.fsdp_config.grad_offload=True \
+    +model.fsdp_config.optimizer_offload=True \
+    +model.fsdp_config.param_offload=True
+</code></pre>
+<p>To run the script, we need to initiate the following command: <code>bash run_qwen_7b_medagentgym.sh 4 /SAVE_PATH/</code> to run the SFT experiments distributed over 4 GPUs and save all the checkpoints in <code>/SAVE_PATH/</code>.</p>
+<h2 id="data-loading">Direct Preference Optimization (DPO)</h2>
+<p>As verl does not support DPO training, we need to use another well-known open-sourced package <a href="https://github.com/OpenRLHF/OpenRLHF">OpenRLHF</a> to conduct the DPO training.
+The OpenRLHF package provides an efficient and scalable implementation of Direct Preference Optimization (DPO), a reinforcement learning framework designed for aligning large language models with human preference data. 
+DPO leverages paired comparisons—where human annotators indicate which response is preferred—to directly optimize the model's outputs without requiring reward modeling or explicit reinforcement learning rollouts. 
+In OpenRLHF, DPO training is facilitated by modular components in the <code>openrlhf/training/dpo/</code> directory, including dedicated dataset classes for preference data and trainer scripts for distributed training. 
+To launch DPO training, users can configure their experiment via the provided Hydra-based YAML files (e.g., <code>openrlhf/configs/dpo.yaml</code>), specifying paths to preference datasets (in formats such as JSONL or Parquet), model checkpoints, and training hyperparameters. 
+The repository's <code>examples/dpo</code> folder includes runnable scripts and sample configs demonstrating how to initiate DPO with various base models (e.g., Llama or Qwen), and details how the DPO loss is computed between chosen and rejected responses to drive model alignment. 
+This workflow enables ML researchers to efficiently perform preference-based fine-tuning on open-source LLMs, supporting large-scale, multi-GPU training and custom data integration with minimal code modification.</p>
+<pre><code class="language-bash">set -x
+
+read -r -d '' training_commands &lt;&lt;EOF
+train_dpo \
+   --save_path /SAVE_PATH/ \
+   --save_steps -1 \
+   --logging_steps 1 \
+   --eval_steps -1 \
+   --train_batch_size 64 \
+   --micro_train_batch_size 1 \
+   --pretrain Qwen/Qwen2.5-7B-Instruct \
+   --bf16 \
+   --max_epochs 1 \
+   --max_len 8192 \
+   --zero_stage 3 \
+   --learning_rate 5e-6 \
+   --beta 0.1 \
+   --dataset json@DATA_PATH \
+   --apply_chat_template \
+   --chosen_key chosen \
+   --rejected_key rejected \
+   --load_checkpoint \
+   --gradient_checkpointing \
+   --label_smoothing 0.1 \
+   --use_wandb yczhuang
+EOF
+
+# --use_wandb
+
+if [[ ${1} != "slurm" ]]; then
+    deepspeed  --master_port=29400 --include localhost:0,1,2,3 --module $training_commands
+fi
+
+</code></pre>
+<p>To run the script, we need to initiate the following command: <code>bash dpo_training.sh</code> to run the DPO experiments distributed over 4 GPUs and save all the checkpoints in <code>/SAVE_PATH/</code>.</p>
+<h2 id="calculating-metrics">Iterative DPO</h2>
+<p>We also conducted some experiments that need collaboration between these two packages. To conduct DPO over warmed-up models (SFT-ed), we can first leverage the verl package to perform multi-turn supervised fine-tuning (SFT) over the randomly selected 100 samples to briefly learn the response style and format for the questions.
+Once SFT is completel, the resulting checkpoint can be used to sample new online preference pairs on the training data according to the final outcome, and can be seamlessly passed to the OpenRLHF package for DPO training.</p>
+<p>For advanced workflows such as iterative DPO, we may perform SFT with verl, run an initial round of DPO with OpenRLHF, and obtain the checkpoint to sample new online preference pairs on the training data. 
+After the data sampling is over, we then repeat the DPO process using the updated preference data.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../env/" class="btn btn-neutral float-left" title="Environment"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../medagentgym.args/" class="btn btn-neutral float-right" title="MedAgentGym.args">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../env/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../medagentgym.args/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
