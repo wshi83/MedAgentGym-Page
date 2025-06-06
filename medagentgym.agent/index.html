@@ -49,9 +49,23 @@
                   <li class="toctree-l1"><a class="reference internal" href="../train.cli/">Running Experiments</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">MUBen API</span></p>
+              <p class="caption"><span class="caption-text">MedAgentGym API</span></p>
               <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="../overview/">Overview</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">medagentgym.agent</a>
+                    <ul class="current">
+                      <li class="toctree-l2"><a class="reference internal" href="#function-pack_instances">class LLMConfig</a>
+                      </li>
+                      <li class="toctree-l2"><a class="reference internal" href="#function-unpack_instances">class MedAgentClass </a>
+                      </li>
+                      <li class="toctree-l2"><a class="reference internal" href="#class-batch">class act</a>
+                          <ul>
+                            <li class="toctree-l3"><a class="reference internal" href="#function-__init__">Process Flow</a>
+                            </li>
+                            <li class="toctree-l3"><a class="reference internal" href="#function-to">Error Handling</a>
+                            </li>
+                          </ul>
+                      </li>
+                    </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../medagentgym.args/">medagentgym.args</a>
                   </li>
@@ -59,32 +73,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../medagentgym.llm/">medagentgym.llm</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">medagentgym.agent</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#function-pack_instances">class LLMConfig</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#function-unpack_instances">class MedAgentClass </a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#class-batch">class act</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#function-__init__">Process Flow</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#function-to">Error Handling</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#class-dataset">Usage Example</a>
-    </li>
-    </ul>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../muben.train/">muben.train</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../muben.utils/">muben.utils</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Examples</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../customize/">Customization</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../medagentgym.utils/">medagentgym.utils</a>
                   </li>
               </ul>
       </div>
@@ -161,7 +150,7 @@ It dynamically selects appropriate model configurations, manages conversation hi
 <li><b><code>action</code></b> (str):  Action identified by the LLM based on observations and conversation history. </li>
 <li><b><code>params</code></b> (dict):  Additional parameters or details associated with the action. </li>
 </ul>
-<h2 id="function-__init__">Process Flow</h2>
+<h3 id="function-__init__">Process Flow</h2>
 <p>Initialization of Conversation: On first interaction: </p>
 <ul>
 <li>Extracts and formats permitted actions.</li>
@@ -189,7 +178,7 @@ It dynamically selects appropriate model configurations, manages conversation hi
 <li>Delays retries based on <code>retry_delay</code> specified in the agent configuration.</li>
 <li>Logs detailed error messages to aid debugging.</li>
 </ul>
-<h2 id="class-dataset">Usage Example</h2>
+<h3 id="class-dataset">Usage Example</h2>
 <pre><code class="language-python">agent_config = {
     'llm': {
         'model_type': 'Azure',
@@ -215,8 +204,8 @@ action, params = agent.act(obs)
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../muben.layers/" class="btn btn-neutral float-left" title="muben.layers"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../muben.train/" class="btn btn-neutral float-right" title="muben.train">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../medagentgym.utils/" class="btn btn-neutral float-left" title="medagentgym.utils"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../medagentgym.args/" class="btn btn-neutral float-right" title="medagentgym.args">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -239,10 +228,10 @@ action, params = agent.act(obs)
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../muben.layers/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../medagentgym.utils/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../muben.train/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../medagentgym.args/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
