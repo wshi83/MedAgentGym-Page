@@ -124,11 +124,10 @@ It is recommended to install these dependencies with <code>pip install</code> as
 pip install -r requirements.txt
 </code></pre>
 <h2 id="docker">Docker</h2>
-<p>You can also run this project within a docker container.
-The docker image can be built through <code>docker build</code>.</p>
+<p>You can also run this project within a Docker container. To build the Docker image, use the following command through <code>docker build</code>.</p>
 <pre><code class="language-bash">docker buildx build -t med_agent_gym:latest .
 </code></pre>
-<p>And <code>docker run</code> is the command to start your container in the terminal.</p>
+<p>Once the image is built, you can start the container from your terminal using the <code>docker run</code> command. </p>
 <pre><code class="language-bash">docker run \
     --network host \
     --shm-size=64g \
@@ -144,10 +143,7 @@ The docker image can be built through <code>docker build</code>.</p>
 </code></pre>
 <p>Please check the <a href="https://docs.docker.com/">official documentation</a> for more options.</p>
 <h2 id="backbone-checkpoints">Additional Details</h2>
-<p>Note that MedAgentBench is one of the datasets used for training and evaluation within MedAgentGym.
-Tasks included in MedAgentBench require interaction with a FHIR-compliant interactive environment and its associated codebase, which must be deployed via a separate Docker instance. 
-We recommend following their <a href="https://github.com/stanfordmlgroup/MedAgentBench/tree/main">Official Guidance</a>. Additionally, we provide detailed instructions below.
-To sample training data and evaluate models using the MedAgentBench dataset, first start the local FHIR server using Docker with the following commands, and then execute your experiment commands:</p>
+<p>Note that MedAgentBench is one of the datasets used for training and evaluation within MedAgentGym. Tasks included in MedAgentBench require interaction with a FHIR-compliant interactive environment and its associated codebase, which must be deployed via a separate Docker instance. We recommend following their <a href="https://github.com/stanfordmlgroup/MedAgentBench/tree/main">Official Guidance</a>. Additionally, we provide detailed instructions below. To sample training data and evaluate models using the MedAgentBench dataset, first start the local FHIR server using Docker with the following commands, and then execute your experiment commands:</p>
 <pre><code class="language-bash">docker pull jyxsu6/medagentbench:latest
 docker tag jyxsu6/medagentbench:latest medagentbench
 docker run -p 8080:8080 medagentbench
