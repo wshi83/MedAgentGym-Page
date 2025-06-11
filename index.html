@@ -107,9 +107,9 @@
 <a href="https://github.com/wshi83/MedAgentGym"><img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" /></a>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>This is the documentation for <strong><a href="https://github.com/wshi83/MedAgentGym">MedAgentGym</a>: Interactive Medical Coding Environment</strong>.
-The code is built to expose implementation details as much as possible and be easily extendable.
-Questions and suggestions are welcome if you find any issues while using our code.</p>
+<p>This repository provides documentation for <strong><a href="https://github.com/wshi83/MedAgentGym">MedAgentGym</a>: Interactive Medical Coding Environment</strong>.
+The codebase is designed to clearly expose implementation details and allow easy extensibility.
+If you encounter any issues or have suggestions, please feel free to reach out—we welcome your feedback!</p>
 </div>
 <p><img alt="" src="img/MedAgentGym-figure1.png" /></p>
 <p>MedAgentGym is the first publicly available training envrionment designed to enhance coding-based medical reasoning capabilities in large language model (LLM) agents.
@@ -122,7 +122,7 @@ This is an arduous task, and we welcome contribution or collaboration in any for
 For its utilization or customization, please visit the <a href="train.cli/">Experiments</a> or <a href="customize/">Customization</a> pages.</p>
 </div>
 <h2 id="backbones">Backbones</h2>
-<p>The following backbone models are implemented in MedAgentGym, and their performance discussed in the article.</p>
+<p>The following backbone models are implemented in MedAgentGym, with their performance benchmarked and discussed in the article.</p>
 <table>
 <thead>
 <tr>
@@ -410,26 +410,26 @@ Computationally, we integrate diverse biomedical coding tasks, ranging from stru
 <p>To standardize tasks across various sources, each instance in MedAgentGym is structured with: (1) a problem description, (2) verifiable ground-truth outputs, and (3) optional data resources (e.g., EHRs). 
 Additionally, standardized system and user prompts are designed to initiate the problem-solving process. 
 MedAgentGym is highly flexible, easily accommodating new tasks that include clear descriptions and verifiable ground-truth outputs. For coding-centric with only code solutions (e.g., BioCoder), we perform verification based on the execution output of provided code solution, which are more reliable than code alone. For tasks involving additional data resources (e.g., EHRSQL), we include metadata on data access and sources. Additional task-specific preparation details are documented.</p>
-<p>Typically, each dataset must comprises 2 files: <code>train_tasks.jsonl</code>, <code>test_tasks.jsonl</code>. 
-Besides, according to the task type, you should also add the required data sources that agent need to access during coding into the dataset directory.
-For example, if the dataset is data base related task, you should include data base files <code>*.csv</code>, or the SQL-integrated version <code>*.db</code>, so that the agent can access the data during coding.
-If the dataset is a machine learning task, that requires to predict specific labels given the training features, you should include the training features and labels in the directory as well.
-In EHRShot and MIMIC-Extract, we both provide the pickled features in <code>*.pkl</code> files and save the labels into <code>*.csv</code> files.
-Aside from the individual dataset files, we also provide a <code>metadata.json</code> file that contains the metadata of all the datasets, including total number of tasks for training and testing.</p>
-Each <code>*_tasks.csv</code> file contains two columns:
+<p>Typically, each dataset should contain two primary files: <code>train_tasks.jsonl</code>, <code>test_tasks.jsonl</code>. 
+Additionally, depending on the task type, you may include supplementary data files necessary for the agent to access during coding. 
+For example, if it involves database-related tasks, you should include data base files <code>*.csv</code>, or the SQL-integrated version <code>*.db</code> to enable data access by the agent.
+For machine learning tasks requiring label prediction based on training features, ensure both serialized feature files (<code>*.pkl</code>) and corresponding label files (<code>*.csv</code>) are present.
+In EHRShot and MIMIC-Extract, we provide these features as <code>*.pkl</code> files and labels as <code>*.csv</code> files.
+Besides individual dataset files, we also provide a <code>metadata.json</code> file, providing metadata for all datasets, including the total number of tasks designated for training and testing.</p>
+Each <code>*_tasks.csv</code> file consists of the following two columns:
 <ul>
-<li><code>idx</code>: A unique identifier of the query sample in the task. Typically used for debug and reproducibility.</li>
-<li><code>question</code>: A question that is prompted to the model. The question is testing the model's code-based reasoning capabilities in solving bio-statistics or biomedcal computational problems.</li>
-<li><code>answer</code>: A verifiable answer to the question. We do not require the intermediate solution or ground-truth code snippets. 
-For those computational problems, we directly use the ground-truth answer.
-For coding problems offering ground-truth solutions, we execute their code in advance and use the execution results as the final answer.
-We do not use the code, because we want the model to generate diverse and creative solutions when coding to solve problems. </li>
+<li><code>idx</code>: A unique identifier for each query sample, typically used for debugging and ensuring reproducibility.</li>
+<li><code>question</code>: The question presented to the model. It is designed to assess the model’s capability for code-based reasoning, particularly in solving bio-statistics or biomedical computational tasks.</li>
+<li><code>answer</code>: A verifiable, correct solution to the posed question. We do not require intermediate solutions or ground-truth code snippets.
+For computational tasks, the provided ground-truth answers are directly utilized.
+FFor coding tasks with known ground-truth solutions, we execute the provided code beforehand and use its output as the final answer.
+We deliberately exclude the original code from the answer, encouraging the model to generate diverse and innovative solutions through coding. </li>
 </ul>
 For a practical example, visit the <a href="train.python/">example</a> page.</p>
 <h2 id="experimental-results">Agent Scaffolds</h2>
 <p>Following <a href="https://arxiv.org/abs/2402.01030">CodeAct</a>, we introduce a default agent scaffold designed for systematic evaluation of coding-based medical reasoning. 
 Interactions within MedAgentGYM are formulated as a Partially Observable Markov Decision Process (POMDP), where tasks are represented as medical reasoning problems sampled from a set \(P\). 
-At each timestep \(t\), the agent receives an observation \(o_t\in\mathcal{O}\) and determines the next action \(a_{t+1}\in\mathcal{A}) based on the interaction history.</p>
+At each timestep \(t\), the agent receives an observation \(o_t\in\mathcal{O}\) and determines the next action \(a_{t+1}\in\mathcal{A}\) based on the interaction history.</p>
 <ul>
 <li><code>request_info</code>: Retrieves relevant data from external sources such as Electronic Health Records (EHRs).</li>
 <li><code>terminal</code>: Handles dependencies or manages local files within isolated Docker environments.</li>
